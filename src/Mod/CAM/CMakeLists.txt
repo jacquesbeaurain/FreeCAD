@@ -674,9 +674,15 @@ SET(all_files
     ${Path_Data}
 )
 
-ADD_CUSTOM_TARGET(PathScripts ALL
+ADD_CUSTOM_TARGET(CAMPathScripts ALL
     SOURCES ${all_files}
 )
+
+foreach(_source IN ITEMS ${all_files})
+    get_filename_component(_source_path "${_source}" PATH)
+    string(REPLACE "/" "\\" _group_path "${_source_path}")
+    source_group("${_group_path}" FILES "${_source}")
+endforeach()
 
 SET(test_files
   ${Path_Scripts}
@@ -684,9 +690,15 @@ SET(test_files
   ${Tests_Fixtures}
 )
 
-ADD_CUSTOM_TARGET(Tests ALL
+ADD_CUSTOM_TARGET(CAMTests ALL
     SOURCES ${test_files}
 )
+
+foreach(_source IN ITEMS ${test_files})
+    get_filename_component(_source_path "${_source}" PATH)
+    string(REPLACE "/" "\\" _group_path "${_source_path}")
+    source_group("${_group_path}" FILES "${_source}")
+endforeach()
 
 fc_copy_sources(PathScripts "${CMAKE_BINARY_DIR}/Mod/CAM" ${all_files})
 fc_copy_sources(Tests "${CMAKE_BINARY_DIR}/Mod/CAM" ${test_files})
