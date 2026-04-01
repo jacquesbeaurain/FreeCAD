@@ -33,6 +33,17 @@
 #include <QImage>
 #include <QLabel>
 
+#if defined(_DEBUG) && defined(_MSC_VER)
+# undef _DEBUG
+# define FC_DISABLE_INVENTOR_DEBUG
+#endif  // _DEBUG && _MSC_VER
+
+#include <Inventor/C/basic.h>
+
+#ifdef FC_DISABLE_INVENTOR_DEBUG
+# define _DEBUG
+#endif  // FC_DISABLE_INVENTOR_DEBUG
+
 #include <Inventor/SbRotation.h>
 #include <Inventor/nodes/SoEnvironment.h>
 #include <Inventor/nodes/SoEventCallback.h>
