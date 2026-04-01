@@ -5,7 +5,7 @@ add_library(FreeCADBase SHARED)
 if(WIN32)
     add_definitions(-DFCBase)
     add_definitions(-DPYCXX_DLL)
-    add_definitions(-DBOOST_DYN_LINK)
+    add_definitions(-DBOOST_ALL_DYN_LINK)
     add_definitions(-DZIPIOS_UTF8)
 endif(WIN32)
 
@@ -41,7 +41,6 @@ target_include_directories(
 
 if(MSVC)
     set(FreeCADBase_LIBS
-        ${Boost_LIBRARIES}
         ${XercesC_LIBRARIES}
         ${ZLIB_LIBRARIES}
         ${ICU_LIBRARIES}

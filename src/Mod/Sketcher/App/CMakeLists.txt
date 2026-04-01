@@ -6,6 +6,10 @@ include_directories(
 
 add_library(Sketcher SHARED)
 
+if(WIN32)
+    add_definitions(-DBOOST_ALL_DYN_LINK)
+endif(WIN32)
+
 # Uncomment this code if you want to try Eigen's multithread
 #find_package(OpenMP)
 #if (OPENMP_FOUND)

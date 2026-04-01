@@ -4,7 +4,7 @@ add_library(FreeCADApp SHARED)
 
 if(WIN32)
     add_definitions(-DFCApp)
-    add_definitions(-DBOOST_DYN_LINK)
+    add_definitions(-DBOOST_ALL_DYN_LINK)
 endif(WIN32)
 
 if(BUILD_TRACY_FRAME_PROFILER)
@@ -77,11 +77,19 @@ target_include_directories(
     ${QtXml_INCLUDE_DIRS}
 )
 
-set(FreeCADApp_LIBS
-    FreeCADBase
-    ${Boost_LIBRARIES}
-    fmt::fmt
-)
+if(MSVC)
+    set(FreeCADApp_LIBS
+        FreeCADBase
+        fmt::fmt
+    )
+else(MSVC)
+    set(FreeCADApp_LIBS
+        FreeCADBase
+        ${Boost_LIBRARIES}
+        fmt::fmt
+    )
+endif(MSVC)
+
 
 if(BUILD_TRACY_FRAME_PROFILER)
     list(APPEND FreeCADApp_LIBS TracyClient)

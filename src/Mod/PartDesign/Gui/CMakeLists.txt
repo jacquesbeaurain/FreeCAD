@@ -241,6 +241,10 @@ SET(PartDesignGuiIcon_SVG
 
 add_library(PartDesignGui SHARED ${PartDesignGui_SRCS} ${PartDesignGuiIcon_SVG})
 
+if(WIN32)
+    add_definitions(-DBOOST_ALL_DYN_LINK)
+endif(WIN32)
+
 if(FREECAD_USE_PCH)
     target_precompile_headers(PartDesignGui PRIVATE
             $<$<COMPILE_LANGUAGE:CXX>:"${CMAKE_CURRENT_LIST_DIR}/PreCompiled.h">
