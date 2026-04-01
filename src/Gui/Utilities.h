@@ -28,16 +28,7 @@
 #include <Base/Converter.h>
 #include <Base/ViewProj.h>
 
-#if defined(_DEBUG) && defined(_MSC_VER)
-# undef _DEBUG
-# define FC_DISABLE_INVENTOR_DEBUG
-#endif  // _DEBUG && _MSC_VER
-
-#include <Inventor/C/basic.h>
-
-#ifdef FC_DISABLE_INVENTOR_DEBUG
-# define _DEBUG
-#endif  // FC_DISABLE_INVENTOR_DEBUG
+#include <Gui/InventorBasic.h>
 
 #include <Inventor/SbColor.h>
 #include <Inventor/SbColor4f.h>

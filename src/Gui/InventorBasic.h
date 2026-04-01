@@ -1,8 +1,5 @@
-// SPDX-License-Identifier: LGPL-2.1-or-later
-
 /***************************************************************************
- *   Copyright (c) 2002 Jürgen Riegel <juergen.riegel@web.de>              *
- *   Copyright (c) 2015 Eivind Kvedalen <eivind@kvedalen.name>             *
+ *   Copyright (c) 2006 Jürgen Riegel <juergen.riegel@web.de>              *
  *                                                                         *
  *   This file is part of the FreeCAD CAx development system.              *
  *                                                                         *
@@ -23,22 +20,32 @@
  *                                                                         *
  ***************************************************************************/
 
-#pragma once
+#ifndef __InventorBasic__
+#define __InventorBasic__
 
 #include <FCConfig.h>
-
-// standard
-#include <cmath>
-
-// STL
-#include <limits>
-#include <sstream>
 
 #ifdef FC_OS_WIN32
 # include <windows.h>
 #endif
 
-#include <Gui/InventorBasic.h>
+// Open Inventor
+#ifdef FC_OS_MACOSX
+# include <OpenGL/gl.h>
+#else
+# include <GL/gl.h>
+#endif
 
-// Qt Toolkit
-#include <Gui/QtAll.h>
+#if defined(_DEBUG) && defined(_MSC_VER)
+# undef _DEBUG
+# define FC_DISABLE_INVENTOR_DEBUG
+#endif  // _DEBUG && _MSC_VER
+
+#include <Inventor/C/basic.h>
+
+#ifdef FC_DISABLE_INVENTOR_DEBUG
+# define _DEBUG
+# undef FC_DISABLE_INVENTOR_DEBUG
+#endif  // FC_DISABLE_INVENTOR_DEBUG
+
+#endif // FC_DISABLE_INVENTOR_DEBUG

@@ -59,23 +59,4 @@
 
 // Inventor
 
-#if defined(_DEBUG) && defined(_MSC_VER)
-# undef _DEBUG
-# define FC_DISABLE_INVENTOR_DEBUG
-#endif  // _DEBUG && _MSC_VER
-
-#include <Inventor/C/basic.h>
-
-#ifdef FC_DISABLE_INVENTOR_DEBUG
-# define _DEBUG
-#endif  // FC_DISABLE_INVENTOR_DEBUG
-
-#include <Inventor/SoPickedPoint.h>
-#include <Inventor/details/SoFaceDetail.h>
-#include <Inventor/events/SoMouseButtonEvent.h>
-#include <Inventor/nodes/SoBaseColor.h>
-#include <Inventor/nodes/SoCoordinate3.h>
-#include <Inventor/nodes/SoDrawStyle.h>
-#include <Inventor/nodes/SoLineSet.h>
-#include <Inventor/nodes/SoPointSet.h>
-#include <Inventor/nodes/SoSeparator.h>
+#include <Gui/InventorAll.h>
