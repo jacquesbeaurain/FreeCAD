@@ -1,5 +1,9 @@
 add_library(FreeCADGui SHARED)
 
+if(WIN32)
+    add_definitions(-DBOOST_ALL_DYN_LINK)
+endif(WIN32)
+
 if ( EXISTS "${CMAKE_SOURCE_DIR}/src/3rdParty/GSL/include" )
     include_directories( ${CMAKE_SOURCE_DIR}/src/3rdParty/GSL/include )
 else()

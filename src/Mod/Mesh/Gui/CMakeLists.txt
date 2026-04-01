@@ -6,12 +6,22 @@ if(MSVC)
     )
 endif(MSVC)
 
-set(MeshGui_LIBS
-    ${Boost_LIBRARIES}
-    ${OPENGL_glu_LIBRARY}
-    Mesh
-    FreeCADGui
-)
+
+
+if(MSVC)
+    set(MeshGui_LIBS
+        ${OPENGL_glu_LIBRARY}
+        Mesh
+        FreeCADGui
+    )
+else(MSVC)
+    set(MeshGui_LIBS
+        ${Boost_LIBRARIES}
+        ${OPENGL_glu_LIBRARY}
+        Mesh
+        FreeCADGui
+    )
+endif(MSVC)
 
 generate_from_py(ViewProviderMesh)
 
