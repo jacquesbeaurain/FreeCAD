@@ -31,34 +31,7 @@
 
 // Inventor
 
-#if defined(_DEBUG) && defined(_MSC_VER)
-# undef _DEBUG
-# define FC_DISABLE_INVENTOR_DEBUG
-#endif  // _DEBUG && _MSC_VER
-
-#include <Inventor/C/basic.h>
-
-#ifdef FC_DISABLE_INVENTOR_DEBUG
-# define _DEBUG
-#endif  // FC_DISABLE_INVENTOR_DEBUG
-
-#include <Inventor/SoPickedPoint.h>
-#include <Inventor/actions/SoRayPickAction.h>
-#include <Inventor/actions/SoSearchAction.h>
-#include <Inventor/details/SoFaceDetail.h>
-#include <Inventor/errors/SoDebugError.h>
-#include <Inventor/events/SoButtonEvent.h>
-#include <Inventor/events/SoKeyboardEvent.h>
-#include <Inventor/events/SoMouseButtonEvent.h>
-#include <Inventor/nodes/SoCoordinate3.h>
-#include <Inventor/nodes/SoDrawStyle.h>
-#include <Inventor/nodes/SoIndexedFaceSet.h>
-#include <Inventor/nodes/SoIndexedLineSet.h>
-#include <Inventor/nodes/SoMaterial.h>
-#include <Inventor/nodes/SoMaterialBinding.h>
-#include <Inventor/nodes/SoNormal.h>
-#include <Inventor/nodes/SoPointSet.h>
-#include <Inventor/nodes/SoShapeHints.h>
+#include <Gui/InventorAll.h>
 
 // Qt
 #include <QApplication>

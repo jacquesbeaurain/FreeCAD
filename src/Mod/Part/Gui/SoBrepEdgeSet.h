@@ -26,20 +26,8 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
-#if defined(_DEBUG) && defined(_MSC_VER)
-# undef _DEBUG
-# define FC_DISABLE_INVENTOR_DEBUG
-#endif  // _DEBUG && _MSC_VER
+#include <Gui/InventorAll.h>
 
-#include <Inventor/C/basic.h>
-
-#ifdef FC_DISABLE_INVENTOR_DEBUG
-# define _DEBUG
-#endif  // FC_DISABLE_INVENTOR_DEBUG
-
-#include <Inventor/fields/SoMFInt32.h>
-#include <Inventor/fields/SoSFColor.h>
-#include <Inventor/nodes/SoIndexedLineSet.h>
 #include <memory>
 #include <vector>
 #include <Gui/Selection/SoFCSelectionContext.h>
