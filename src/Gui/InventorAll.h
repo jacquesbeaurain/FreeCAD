@@ -23,29 +23,7 @@
 #ifndef __InventorAll__
 #define __InventorAll__
 
-#include <FCConfig.h>
-
-#ifdef FC_OS_WIN32
-# include <windows.h>
-#endif
-
-// Open Inventor
-#ifdef FC_OS_MACOSX
-# include <OpenGL/gl.h>
-#else
-# include <GL/gl.h>
-#endif
-
-#if defined(_DEBUG) && defined(_MSC_VER)
-#undef _DEBUG
-#define FC_DISABLE_INVENTOR_DEBUG
-#endif  // _DEBUG && _MSC_VER
-
-#include <Inventor/C/basic.h>
-
-#ifdef FC_DISABLE_INVENTOR_DEBUG
-#define _DEBUG
-#endif  // FC_DISABLE_INVENTOR_DEBUG
+#include "InventorBasic.h"
 
 #include <Inventor/SbBSPTree.h>
 #include <Inventor/SbBox.h>
