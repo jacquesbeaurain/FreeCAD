@@ -39,7 +39,7 @@
 #include <Base/Exception.h>
 #include "SafeMode.h"
 
-#include <Python.h>
+#include <FCPython.h>
 #include <QString>
 
 #include "Base/Console.h"

@@ -141,7 +141,7 @@ bool Span::OnSpan(const Point& p) const
 bool Span::OnSpan(const Point& p, double* t) const
 {
     // FAST OnSpan test - assumes that p lies ON the unbounded span
-#if _DEBUG
+#ifdef _DEBUG
     if (!this->returnSpanProperties) {
         FAILURE(L"OnSpan - properties no set, incorrect calling code");
     }
@@ -150,7 +150,7 @@ bool Span::OnSpan(const Point& p, double* t) const
     bool ret;
 
     if (dir == LINEAR) {
-#if _DEBUG
+#ifdef _DEBUG
         // check p is on line
         CLine cl(*this);
         double d = fabs(cl.Dist(p));
@@ -165,7 +165,7 @@ bool Span::OnSpan(const Point& p, double* t) const
     }
     else {
         // true if p lies on arc span sp (p must be on circle of span)
-#if _DEBUG
+#ifdef _DEBUG
         // check that p lies on the arc
         double d = p.Dist(pc);
         if (FNE(d, radius, geoff_geometry::TOLERANCE)) {

@@ -22,7 +22,7 @@
 
 #include <SMESH_Version.h>
 
-#include <Python.h>
+#include <FCPython.h>
 #include <SMESHDS_Mesh.hxx>
 #include <SMESH_Mesh.hxx>
 

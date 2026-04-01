@@ -20,7 +20,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <Python.h>
+#include <FCPython.h>
 
 #include <Base/FileInfo.h>
 #include <Base/UnitPy.h>

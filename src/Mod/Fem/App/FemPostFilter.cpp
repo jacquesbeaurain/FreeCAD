@@ -20,7 +20,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <Python.h>
+#include <FCPython.h>
 #include <vtkDoubleArray.h>
 #include <vtkPointData.h>
 #include <vtkAlgorithm.h>

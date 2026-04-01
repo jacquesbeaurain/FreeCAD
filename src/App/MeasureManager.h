@@ -29,7 +29,7 @@
 #include <tuple>
 #include <functional>
 #include <string>
-#include <Python.h>
+#include <FCPython.h>
 #include <App/DocumentObject.h>
 #include <Base/Vector3D.h>
 #include <App/DocumentObserver.h>

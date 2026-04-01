@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <Python.h>
+#include <FCPython.h>
 #include <QTimer>
 #include "PythonEditor.h"
 

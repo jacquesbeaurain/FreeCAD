@@ -57,7 +57,7 @@
 #undef _POSIX_C_SOURCE
 
 // pull in python definitions
-#include <Python.h>
+#include <FCPython.h>
 
 // fix issue with Python assuming that isspace, toupper etc are macros
 #if defined(isspace) || defined(FC_OS_MACOSX)
