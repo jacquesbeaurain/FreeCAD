@@ -6,5 +6,5 @@
 #include <Python.h>
 
 #ifdef FC_DISABLE_PYTHON_DEBUG
-#define _DEBUG
+#define _DEBUG 1
 #endif  // FC_DISABLE_PYTHON_DEBUG

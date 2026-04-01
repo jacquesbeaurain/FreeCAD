@@ -44,7 +44,7 @@
 #include <Inventor/C/basic.h>
 
 #ifdef FC_DISABLE_INVENTOR_DEBUG
-# define _DEBUG
+# define _DEBUG 1
 # undef FC_DISABLE_INVENTOR_DEBUG
 #endif  // FC_DISABLE_INVENTOR_DEBUG
 
