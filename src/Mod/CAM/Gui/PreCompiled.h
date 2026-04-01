@@ -39,6 +39,18 @@
 #include <QRegularExpression>
 
 // all of Inventor
+
+#if defined(_DEBUG) && defined(_MSC_VER)
+# undef _DEBUG
+# define FC_DISABLE_INVENTOR_DEBUG
+#endif  // _DEBUG && _MSC_VER
+
+#include <Inventor/C/basic.h>
+
+#ifdef FC_DISABLE_INVENTOR_DEBUG
+# define _DEBUG
+#endif  // FC_DISABLE_INVENTOR_DEBUG
+
 #include <Inventor/SbVec3f.h>
 #include <Inventor/details/SoLineDetail.h>
 #include <Inventor/nodes/SoBaseColor.h>
