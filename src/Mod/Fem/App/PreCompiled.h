@@ -44,7 +44,7 @@
 #include <boost/assign/list_of.hpp>
 #include <boost/tokenizer.hpp>
 
-#include <Python.h>
+#include <FCPython.h>
 #include <QFileInfo>
 #include <QStandardPaths>
 

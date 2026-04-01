@@ -29,7 +29,7 @@
 # include <windows.h>
 #endif
 #include <cstring>
-#include <Python.h>
+#include <FCPython.h>
 
 #include <frameobject.h>
 

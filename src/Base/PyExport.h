@@ -40,7 +40,7 @@
 # undef _XOPEN_SOURCE
 #endif
 
-#include <Python.h>
+#include <FCPython.h>
 
 #include <FCConfig.h>
 

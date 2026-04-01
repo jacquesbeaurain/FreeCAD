@@ -28,7 +28,7 @@
 #include <FCConfig.h>
 
 // Python
-#include <Python.h>
+#include <FCPython.h>
 
 // standard
 #include <algorithm>

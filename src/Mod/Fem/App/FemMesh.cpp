@@ -20,7 +20,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <Python.h>
+#include <FCPython.h>
 #include <cstdlib>
 #include <memory>
 
