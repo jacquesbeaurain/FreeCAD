@@ -22,7 +22,7 @@
 
 #include <cmath>
 
-#include <Python.h>
+#include <FCPython.h>
 #include <vtkAppendFilter.h>
 #include <vtkDataSetReader.h>
 #include <vtkImageData.h>

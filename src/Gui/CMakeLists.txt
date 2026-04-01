@@ -1528,10 +1528,10 @@ if(FREECAD_USE_PCH)
             $<$<COMPILE_LANGUAGE:CXX>:"${CMAKE_CURRENT_LIST_DIR}/PreCompiled.h">
     )
 
-    set_source_files_properties(
-            ${qsintActionPanel_SRCS}
-            ${Quarter_SRCS}
-            PROPERTIES SKIP_PRECOMPILE_HEADERS TRUE)
+#    set_source_files_properties(
+#            ${qsintActionPanel_SRCS}
+#            ${Quarter_SRCS}
+#            PROPERTIES SKIP_PRECOMPILE_HEADERS TRUE)
 endif(FREECAD_USE_PCH)
 
 if (FREECAD_USE_QT_DIALOGS)

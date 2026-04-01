@@ -45,7 +45,7 @@ MacroFile::MacroFile() = default;
 void MacroFile::open(const char* sName)
 {
     // check
-#if _DEBUG
+#ifdef _DEBUG
     Q_ASSERT(!this->openMacro);
 #endif
 
@@ -232,7 +232,7 @@ void MacroManager::OnChange(Base::Subject<const char*>& rCaller, const char* sRe
 void MacroManager::open(MacroType eType, const char* sName)
 {
     // check
-#if _DEBUG
+#ifdef _DEBUG
     assert(eType == File);
 #else
     Q_UNUSED(eType);

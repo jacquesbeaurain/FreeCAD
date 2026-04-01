@@ -35,6 +35,12 @@
 #include "KeyboardP.h"
 #include "devices/Keyboard.h"
 
+// Avoid problem with Microsoft Visual C++ Win32 API headers (yes,
+// they actually #define DELETE in their WINNT.H header file).
+#ifdef DELETE
+# undef DELETE
+#endif  // DELETE
+
 
 using namespace SIM::Coin3D::Quarter;
 

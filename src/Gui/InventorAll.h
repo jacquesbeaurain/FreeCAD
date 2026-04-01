@@ -36,7 +36,17 @@
 # include <GL/gl.h>
 #endif
 
+#if defined(_DEBUG) && defined(_MSC_VER)
+#undef _DEBUG
+#define FC_DISABLE_INVENTOR_DEBUG
+#endif  // _DEBUG && _MSC_VER
+
 #include <Inventor/C/basic.h>
+
+#ifdef FC_DISABLE_INVENTOR_DEBUG
+#define _DEBUG
+#endif  // FC_DISABLE_INVENTOR_DEBUG
+
 #include <Inventor/SbBSPTree.h>
 #include <Inventor/SbBox.h>
 #include <Inventor/SbBox2f.h>
@@ -265,4 +275,7 @@
 #include <Inventor/VRMLnodes/SoVRMLNormal.h>
 #include <Inventor/VRMLnodes/SoVRMLParent.h>
 #include <Inventor/VRMLnodes/SoVRMLShape.h>
+
+#include <FCPython.h>
+
 #endif

@@ -21,7 +21,7 @@
  *                                                                         *
  **************************************************************************/
 
-#include <Python.h>
+#include <FCPython.h>
 
 #include "FemPostObjectPy.h"
 #include "FemPostObjectPy.cpp"

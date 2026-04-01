@@ -24,7 +24,7 @@
 #pragma once
 
 #include <QObject>
-#include <Python.h>
+#include <FCPython.h>
 #include <frameobject.h>
 #include <memory>
 #include <FCGlobal.h>
