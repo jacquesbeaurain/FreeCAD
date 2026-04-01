@@ -259,6 +259,11 @@ add_library(TechDraw SHARED
     ${Python_SRCS}
 )
 
+if(WIN32)
+    add_definitions(-DBOOST_ALL_DYN_LINK)
+endif(WIN32)
+
+
 if(FREECAD_USE_PCH)
     target_precompile_headers(TechDraw PRIVATE
             $<$<COMPILE_LANGUAGE:CXX>:"${CMAKE_CURRENT_LIST_DIR}/PreCompiled.h">

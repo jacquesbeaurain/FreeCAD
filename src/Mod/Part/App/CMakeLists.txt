@@ -2,6 +2,10 @@
 
 add_library(Part SHARED)
 
+if(WIN32)
+    add_definitions(-DBOOST_ALL_DYN_LINK)
+endif(WIN32)
+
 target_include_directories(
     Part
     PRIVATE

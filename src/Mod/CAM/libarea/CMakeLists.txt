@@ -93,7 +93,6 @@ if(MSVC)
     endif()
 
     set(area_LIBS
-        ${Boost_LIBRARIES}
         ${area_native_LIBS}
     )
     if(BUILD_DYNAMIC_LINK_PYTHON)
