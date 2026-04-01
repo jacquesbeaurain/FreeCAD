@@ -40,15 +40,5 @@
 #include <QInputDialog>
 #include <QMessageBox>
 
-// Inventor
-#include <Inventor/SbVec2f.h>
-#include <Inventor/errors/SoDebugError.h>
-#include <Inventor/events/SoMouseButtonEvent.h>
-#include <Inventor/nodes/SoCamera.h>
-#include <Inventor/nodes/SoCoordinate3.h>
-#include <Inventor/nodes/SoDrawStyle.h>
-#include <Inventor/nodes/SoIndexedPointSet.h>
-#include <Inventor/nodes/SoMaterial.h>
-#include <Inventor/nodes/SoMaterialBinding.h>
-#include <Inventor/nodes/SoNormal.h>
-#include <Inventor/nodes/SoPointSet.h>
+// all of Inventor
+#include <Gui/InventorAll.h>

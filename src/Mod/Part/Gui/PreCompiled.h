@@ -69,6 +69,19 @@
 #  include <GL/glext.h>
 # endif  // FC_OS_MACOSX
 #endif   // FC_OS_WIN32
+
+#if defined(_DEBUG) && defined(_MSC_VER)
+# undef _DEBUG
+# define FC_DISABLE_INVENTOR_DEBUG
+#endif  // _DEBUG && _MSC_VER
+
+#include <Inventor/C/basic.h>
+
+#ifdef FC_DISABLE_INVENTOR_DEBUG
+# define _DEBUG
+#endif  // FC_DISABLE_INVENTOR_DEBUG
+
+
 // Should come after glext.h to avoid warnings
 #include <Inventor/C/glue/gl.h>
 
