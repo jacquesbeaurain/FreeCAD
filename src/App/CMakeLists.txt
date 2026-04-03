@@ -80,7 +80,8 @@ target_include_directories(
 if(MSVC)
     set(FreeCADApp_LIBS
         FreeCADBase
-        fmt::fmt
+        debug       fmtd.lib
+        optimized   fmt.lib
     )
 else(MSVC)
     set(FreeCADApp_LIBS
