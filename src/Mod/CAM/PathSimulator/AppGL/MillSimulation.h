@@ -42,6 +42,12 @@
 #define VIEWITEM_BASE_SHAPE 2
 #define VIEWITEM_MAX 4
 
+
+namespace Gui
+{
+class NavigationStyle;
+}
+
 namespace MillSim
 {
 
@@ -148,6 +154,8 @@ protected:
     int mLastMouseX = 0, mLastMouseY = 0;
     int mMouseButtonState = 0;
     int mLastModifiers = 0;
+
+    Gui::NavigationStyle* mNavigation = nullptr;
 };
 
 }  // namespace MillSim
