@@ -84,7 +84,18 @@ if(BUILD_TRACY_FRAME_PROFILER)
     list(APPEND FreeCADBase_LIBS TracyClient)
 endif()
 
-list(APPEND FreeCADBase_LIBS libfastsignals fmt::fmt)
+list(APPEND FreeCADBase_LIBS libfastsignals)
+
+if(MSVC)
+    list(APPEND FreeCADBase_LIBS
+        debug       fmtd.lib
+        optimized   fmt.lib
+    )
+else()
+    list(APPEND FreeCADBase_LIBS
+        fmt::fmt
+    )
+endif()
 
 if (BUILD_DYNAMIC_LINK_PYTHON)
     list(APPEND FreeCADBase_LIBS ${Python3_LIBRARIES})
