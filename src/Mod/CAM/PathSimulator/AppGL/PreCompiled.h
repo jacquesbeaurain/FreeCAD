@@ -48,3 +48,6 @@
 
 // Xerces
 #include <xercesc/util/XercesDefs.hpp>
+
+// Inventor
+#include "InventorBasic.h"
