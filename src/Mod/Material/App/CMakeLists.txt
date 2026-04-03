@@ -20,9 +20,10 @@ list(APPEND Materials_LIBS
     ${QtConcurrent_LIBRARIES}
 )
 
-if(yaml-cpp_VERSION VERSION_LESS 0.8.0)
+if(MSVC)
     list(APPEND Materials_LIBS
-        ${YAML_CPP_LIBRARIES}
+        debug       yaml-cppd.lib
+        optimized   yaml-cpp.lib
     )
 else()
     list(APPEND Materials_LIBS

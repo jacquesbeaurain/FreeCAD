@@ -10,3 +10,14 @@ target_link_libraries(Misc_tests_run PRIVATE
     ${Google_Tests_LIBS}
     fmt::fmt
 )
+
+if(MSVC)
+    target_link_libraries(Misc_tests_run PRIVATE
+            debug       fmtd.lib
+            optimized   fmt.lib
+    )
+else()
+    target_link_libraries(Misc_tests_run PRIVATE
+        fmt::fmt
+    )
+endif()

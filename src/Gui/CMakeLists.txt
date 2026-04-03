@@ -181,13 +181,14 @@ list(APPEND FreeCADGui_LIBS
 
 link_directories(${YAML_CPP_LIBRARY_DIR})
 
-if(yaml-cpp_VERSION VERSION_LESS 0.8.0)
+if(MSVC)
     list(APPEND FreeCADGui_LIBS
-            ${YAML_CPP_LIBRARIES}
+        debug       yaml-cppd.lib
+        optimized   yaml-cpp.lib
     )
 else()
     list(APPEND FreeCADGui_LIBS
-            yaml-cpp::yaml-cpp
+        yaml-cpp::yaml-cpp
     )
 endif()
 
