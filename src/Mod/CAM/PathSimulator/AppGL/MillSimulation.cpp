@@ -27,6 +27,13 @@
 #include <vector>
 #include <iostream>
 
+#include <Gui/Document.h>
+#include <Gui/Navigation/NavigationStyle.h>
+#include <Gui/View3DInventor.h>
+#include <Gui/View3DInventorViewer.h>
+#include <Gui/Application.h>
+
+
 #define DRAG_ZOOM_FACTOR 10
 
 namespace MillSim
@@ -35,7 +42,42 @@ namespace MillSim
 MillSimulation::MillSimulation()
 {
     mCurMotion = {eNop, -1, 0, 0, 0, 0, 0, 0, 0, '\0', 0.0};
-    guiDisplay.SetMillSimulator(this);
+    
+    Base::Type style = Base::Type::fromName("Gui::CADNavigationStyle");
+    auto doc = Gui::Application::Instance->activeDocument();
+    if (doc) {
+        auto mdi = qobject_cast<Gui::View3DInventor*>(doc->getActiveView());
+        if (mdi) {
+            auto viewer = mdi->getViewer();
+            style = viewer->navigationStyle()->getTypeId();
+        }
+        else {
+#if FC_DEBUG
+            SoDebugError::postWarning(
+                "MillSimulation::MillSimulation",
+                "Failed to determine viewer style from active view."
+            );
+#endif  // FC_DEBUG
+        }
+       
+    }
+
+    Base::Type navtype 
+        = Base::Type::getTypeIfDerivedFrom(style.getName(), Gui::NavigationStyle::getClassTypeId());
+    mNavigation = static_cast<Gui::NavigationStyle*>(navtype.createInstance());
+
+#if FC_DEBUG
+    if (!mNavigation) {
+        SoDebugError::postWarning(
+            "MillSimulation::MillSimulation",
+            "Failed to create navigation object."
+        );
+        // Default to inventor 
+        mNavigation = new Gui::InventorNavigationStyle();
+    }
+#endif  // FC_DEBUG
+
+    guiDisplay.SetMillSimulator(this);    
 }
 
 MillSimulation::~MillSimulation()
@@ -65,6 +107,11 @@ void MillSimulation::Clear()
     mCurStep = 0;
     mPathStep = -1;
     mNTotalSteps = 0;
+
+    if (mNavigation) {
+        delete mNavigation;
+        mNavigation = nullptr;
+    }
 
     simulationInitiated = false;
 }
