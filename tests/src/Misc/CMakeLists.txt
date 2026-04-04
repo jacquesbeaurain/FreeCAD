@@ -8,7 +8,6 @@ target_link_libraries(Misc_tests_run PRIVATE
     GTest::gtest_main
     GTest::gmock_main
     ${Google_Tests_LIBS}
-    fmt::fmt
 )
 
 if(MSVC)
@@ -16,6 +15,8 @@ if(MSVC)
             debug       fmtd.lib
             optimized   fmt.lib
     )
+    target_compile_options(Misc_tests_run PRIVATE /utf-8)
+    target_compile_options(Misc_tests_run PRIVATE /utf-8)
 else()
     target_link_libraries(Misc_tests_run PRIVATE
         fmt::fmt
