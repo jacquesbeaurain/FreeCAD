@@ -629,15 +629,15 @@ void MillSimulation::SetBaseObject(const std::vector<Vertex>& verts, const std::
 
 void MillSimulation::MouseDrag(int buttons, int dx, int dy)
 {
-    if (buttons == (MS_MOUSE_MID | MS_MOUSE_LEFT) || buttons == MS_KBD_ALT) {
-        simDisplay.TiltEye((float)dy / 100.0f);
-        simDisplay.RotateEye((float)dx / 100.0f);
-    }
-    else if (buttons == MS_MOUSE_MID || buttons == MS_KBD_SHIFT) {
+    if (buttons == (MS_MOUSE_MID | MS_KBD_SHIFT)) {
         simDisplay.MoveEye(dx, -dy);
     }
-    else if (buttons == (MS_KBD_CONTROL | MS_KBD_SHIFT)) {
+    else if (buttons == (MS_MOUSE_MID | MS_KBD_CONTROL)) {
         Zoom(0.003 * dy);
+    }
+    else if (buttons == MS_MOUSE_LEFT || buttons == MS_MOUSE_MID) {
+        simDisplay.TiltEye((float)dy / 100.0f);
+        simDisplay.RotateEye((float)dx / 100.0f);
     }
     guiDisplay.MouseDrag(buttons, dx, dy);
 }
