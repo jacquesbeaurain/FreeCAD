@@ -1,7 +1,3 @@
-if(MSVC)
-    add_compile_options(/utf-8)
-endif(MSVC)
-
 # In previous versions this target copied mtextedit.h to the binary directory that causes
 # automoc to generate linking errors.
 if(NOT ${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
@@ -484,6 +480,8 @@ target_include_directories(
 target_link_libraries(TechDrawGui ${TechDrawGui_LIBS})
 
 if (MSVC)
+    target_compile_options(TechDrawGui PRIVATE /utf-8)
+    target_compile_options(TechDrawGui PRIVATE /utf-8)
     target_compile_definitions(TechDrawGui PRIVATE WIN32_LEAN_AND_MEAN)
 endif()
 

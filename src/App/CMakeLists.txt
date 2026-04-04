@@ -83,6 +83,8 @@ if(MSVC)
         debug       fmtd.lib
         optimized   fmt.lib
     )
+    target_compile_options(FreeCADApp PRIVATE /utf-8)
+    target_compile_options(FreeCADApp PRIVATE /utf-8)
 else(MSVC)
     set(FreeCADApp_LIBS
         FreeCADBase

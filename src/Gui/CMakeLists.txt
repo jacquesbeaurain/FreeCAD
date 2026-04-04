@@ -186,6 +186,8 @@ if(MSVC)
         debug       yaml-cppd.lib
         optimized   yaml-cpp.lib
     )
+    target_compile_options(FreeCADGui PRIVATE /utf-8)
+    target_compile_options(FreeCADGui PRIVATE /utf-8)
 else()
     list(APPEND FreeCADGui_LIBS
         yaml-cpp::yaml-cpp
