@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <Python.h>
+#include <FCPython.h>
 
 #include "Base/Translation.h"
 #include "Base/Translate.h"
