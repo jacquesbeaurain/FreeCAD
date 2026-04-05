@@ -34,46 +34,13 @@ import Path.Op.Util as PathOpUtil
 import PathScripts.PathUtils as PathUtils
 import math
 
+from trackperf import track_perf
+
 # lazily loaded modules
 from lazy_loader.lazy_loader import LazyLoader
 
 MeshPart = LazyLoader("MeshPart", globals(), "MeshPart")  # tessellate bug Workaround
 Part = LazyLoader("Part", globals(), "Part")
-
-
-import atexit
-import time
-from contextlib import contextmanager
-
-# 1. Record the start time
-__g_total_times = None
-
-def report_durations():
-    if __g_total_times is not None:
-        for name, duration_ns in __g_total_times.items():
-            duration = duration_ns * 1e-9  # convert nanoseconds to seconds
-            print(f"{name} : {duration} seconds")
-
-@contextmanager
-def track_perf(name):
-    start_time_ns = time.perf_counter_ns() 
-    try:
-        yield start_time_ns
-    finally:
-        global __g_total_times
-    
-        end_time_ns = time.perf_counter_ns()
-        duration_ns = end_time_ns - start_time_ns
-        
-        if __g_total_times is None:
-            __g_total_times = {}
-            atexit.register(report_durations)
-    
-        total_time_ns = 0
-        if name in __g_total_times:
-            total_time_ns = __g_total_times[name]
-        __g_total_times[name] = total_time_ns + duration_ns
-
 
 
 if False:
