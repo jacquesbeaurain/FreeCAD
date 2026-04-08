@@ -167,8 +167,8 @@ def directional(
             if not intervals:
                 continue
             s0, s1 = intervals[0]
-            start_s = max(s0 - pass_extension, min_s - s_margin)
-            end_s = min(s1 + pass_extension, max_s + s_margin)
+            start_s = max(s0 - pass_extension, min_s - 0.001)
+            end_s = min(s1 + pass_extension, max_s + 0.001)
             if end_s <= start_s:
                 continue
             if milling_direction == "climb":

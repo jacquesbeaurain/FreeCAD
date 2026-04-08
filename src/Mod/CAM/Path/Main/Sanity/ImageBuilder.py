@@ -31,6 +31,8 @@ import Path.Log
 import os
 import tempfile
 
+from pivy import coin
+
 if False:
     Path.Log.setLevel(Path.Log.Level.DEBUG, Path.Log.thisModule())
     Path.Log.trackModule(Path.Log.thisModule())
