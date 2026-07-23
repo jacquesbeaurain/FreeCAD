@@ -4971,11 +4971,7 @@ TopoShape& TopoShape::makeElementFace(
             mkFace->addTopoShape(shape);
         }
     }
-#if OCC_VERSION_HEX >= 0x070600
-    mkFace->Build(std::make_unique<Part::ProgressIndicator>()->Start());
-#else
     mkFace->Build();
-#endif
 
     const auto& ret = mkFace->getTopoShape();
     setShape(ret._Shape);
@@ -6225,11 +6221,7 @@ TopoShape& TopoShape::makeElementBoolean(
     else if (tolerance < 0.0) {
         FCBRepAlgoAPIHelper::setAutoFuzzy(mk.get());
     }
-#if OCC_VERSION_HEX >= 0x070600
-    mk->Build(std::make_unique<Part::ProgressIndicator>()->Start());
-#else
     mk->Build();
-#endif
     if (Base::Sequencer().wasCanceled()) {
         FC_THROWM(Base::CADKernelError, "User aborted");
     }
