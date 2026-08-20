@@ -4316,7 +4316,11 @@ TopoShape& TopoShape::makeFace(const std::vector<TopoShape>& shapes, const char*
             mkFace->addShape(s.getShape());
         }
     }
+#if OCC_VERSION_HEX >= 0x070600
+    mkFace->Build(std::make_unique<Part::ProgressIndicator>()->Start());
+#else
     mkFace->Build();
+#endif
     _Shape = mkFace->Shape();
     return *this;
 }
