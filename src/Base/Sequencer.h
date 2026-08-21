@@ -25,6 +25,7 @@
 
 #pragma once
 
+#include <atomic>
 #include <cstddef>
 #include <FCGlobal.h>
 
@@ -251,9 +252,9 @@ protected:
     // NOLINTEND
 
 private:
-    bool _bLocked {false};     /**< Lock/unlock sequencer. */
-    bool _bCanceled {false};   /**< Is set to true if the last pending operation was canceled */
-    int _nLastPercentage {-1}; /**< Progress in percent. */
+    bool _bLocked {false};                  /**< Lock/unlock sequencer. */
+    std::atomic<bool> _bCanceled {false};   /**< Is set to true if the last pending operation was canceled */
+    int _nLastPercentage {-1};              /**< Progress in percent. */
 };
 
 /** This special sequencer might be useful if you want to suppress any indication

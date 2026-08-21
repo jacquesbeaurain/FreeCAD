@@ -94,7 +94,7 @@ bool SequencerBase::start(const char* pszStr, size_t steps)
 
     this->nTotalSteps = steps;
     this->nProgress = 0;
-    this->_bCanceled = false;
+    this->_bCanceled.store(false);
 
     setText(pszStr);
 
@@ -182,18 +182,17 @@ bool SequencerBase::isRunning() const
 
 bool SequencerBase::wasCanceled() const
 {
-    std::lock_guard<std::recursive_mutex> locker(SequencerP::mutex);
-    return this->_bCanceled;
+    return this->_bCanceled.load();
 }
 
 void SequencerBase::tryToCancel()
 {
-    this->_bCanceled = true;
+    this->_bCanceled.store(true);
 }
 
 void SequencerBase::rejectCancel()
 {
-    this->_bCanceled = false;
+    this->_bCanceled.store(false);
 }
 
 int SequencerBase::progressInPercent() const
@@ -203,7 +202,7 @@ int SequencerBase::progressInPercent() const
 
 void SequencerBase::resetData()
 {
-    this->_bCanceled = false;
+    this->_bCanceled.store(false);
 }
 
 void SequencerBase::setText(const char* /*text*/)
