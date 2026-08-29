@@ -761,11 +761,7 @@ ADD_CUSTOM_TARGET(CAMPathScripts ALL
     SOURCES ${all_files}
 )
 
-foreach(_source IN ITEMS ${all_files})
-    get_filename_component(_source_path "${_source}" PATH)
-    string(REPLACE "/" "\\" _group_path "${_source_path}")
-    source_group("${_group_path}" FILES "${_source}")
-endforeach()
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "Source Files" FILES ${all_files})
 
 SET(test_files
   ${Path_Scripts}
@@ -777,11 +773,7 @@ ADD_CUSTOM_TARGET(CAMTests ALL
     SOURCES ${test_files}
 )
 
-foreach(_source IN ITEMS ${test_files})
-    get_filename_component(_source_path "${_source}" PATH)
-    string(REPLACE "/" "\\" _group_path "${_source_path}")
-    source_group("${_group_path}" FILES "${_source}")
-endforeach()
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "Source Files" FILES ${test_files})
 
 fc_copy_sources(CAMPathScripts "${CMAKE_BINARY_DIR}/Mod/CAM" ${all_files})
 fc_copy_sources(CAMTests "${CMAKE_BINARY_DIR}/Mod/CAM" ${test_files})
