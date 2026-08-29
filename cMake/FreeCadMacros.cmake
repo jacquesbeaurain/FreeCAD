@@ -32,6 +32,7 @@ function(fc_copy_sources target_name outpath)
             MAIN_DEPENDENCY "${infile}"
         )
         target_sources(${target_name} PRIVATE "${outfile}")
+        source_group(TREE ${outpath} PREFIX "Build Files" FILES ${outfile})
     endforeach(it)
 endfunction(fc_copy_sources)
 
