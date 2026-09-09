@@ -1740,6 +1740,13 @@ def Create(res):
     try:
         obj = res.objFactory(res.name, obj=None, parentJob=res.job)
         if obj.Proxy:
+            if (
+                hasattr(res.job, "Operations")
+                and res.job.Operations
+                and hasattr(res.job.Operations, "ViewObject")
+                and res.job.Operations.ViewObject
+            ):
+                res.job.Operations.ViewObject.Visibility = True
             obj.ViewObject.Proxy = ViewProvider(obj.ViewObject, res)
             obj.ViewObject.Visibility = True
             FreeCAD.ActiveDocument.commitTransaction()

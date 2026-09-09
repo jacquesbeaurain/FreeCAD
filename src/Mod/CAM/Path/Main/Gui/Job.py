@@ -157,6 +157,14 @@ class ViewProvider:
         for base in self.obj.Model.Group:
             Path.Log.debug(f"{base.Name}: {base.ViewObject.Visibility}")
 
+        # Force tree view to claim children under Job if not restoring
+        if hasattr(self.obj, "Document") and self.obj.Document and not self.obj.Document.Restoring:
+            for prop in ("Operations", "Model", "Stock", "SetupSheet", "Tools"):
+                if hasattr(self.obj, prop):
+                    val = getattr(self.obj, prop)
+                    if val:
+                        setattr(self.obj, prop, val)
+
     def onChanged(self, vobj, prop):
         if prop == "Visibility":
             self.showOriginAxis(vobj.Visibility)
@@ -2057,8 +2065,18 @@ def Create(base, template=None, openTaskPanel=True):
     FreeCAD.ActiveDocument.openTransaction("Create Job")
     try:
         obj = PathJob.Create("Job", base, template)
-        obj.ViewObject.Proxy = ViewProvider(obj.ViewObject)
-        obj.ViewObject.addExtension("Gui::ViewProviderGroupExtensionPython")
+        if not obj.ViewObject.Proxy:
+            obj.ViewObject.Proxy = ViewProvider(obj.ViewObject)
+        if (
+            hasattr(obj.ViewObject, "extensions")
+            and "Gui::ViewProviderGroupExtensionPython" not in obj.ViewObject.extensions()
+        ):
+            obj.ViewObject.addExtension("Gui::ViewProviderGroupExtensionPython")
+        for prop in ("Operations", "Model", "Stock", "SetupSheet", "Tools"):
+            if hasattr(obj, prop):
+                val = getattr(obj, prop)
+                if val:
+                    setattr(obj, prop, val)
         FreeCAD.ActiveDocument.commitTransaction()
         obj.Document.recompute()
         if openTaskPanel:

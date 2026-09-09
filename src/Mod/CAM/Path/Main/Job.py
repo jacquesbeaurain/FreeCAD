@@ -949,4 +949,24 @@ def Create(name, base, templateFile=None):
     obj = FreeCAD.ActiveDocument.addObject("Path::FeaturePython", name)
     obj.addExtension("App::GroupExtensionPython")
     obj.Proxy = ObjectJob(obj, models, templateFile)
+
+    if FreeCAD.GuiUp and hasattr(obj, "ViewObject") and obj.ViewObject:
+        try:
+            import Path.Main.Gui.Job as PathJobGui
+
+            if not obj.ViewObject.Proxy:
+                obj.ViewObject.Proxy = PathJobGui.ViewProvider(obj.ViewObject)
+            if (
+                hasattr(obj.ViewObject, "extensions")
+                and "Gui::ViewProviderGroupExtensionPython" not in obj.ViewObject.extensions()
+            ):
+                obj.ViewObject.addExtension("Gui::ViewProviderGroupExtensionPython")
+            for prop in ("Operations", "Model", "Stock", "SetupSheet", "Tools"):
+                if hasattr(obj, prop):
+                    val = getattr(obj, prop)
+                    if val:
+                        setattr(obj, prop, val)
+        except Exception as e:
+            Path.Log.warning(f"Could not attach GUI ViewProvider to {obj.Label}: {e}")
+
     return obj
