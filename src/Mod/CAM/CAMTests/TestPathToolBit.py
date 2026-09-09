@@ -79,3 +79,24 @@ class TestPathToolBit(PathTestWithAssets):
             # Add more assertions here to check if other attributes are preserved
         except Exception as e:
             self.fail(f"ToolBit is not picklable: {e}")
+
+    def testToolBitCascadesDeletion(self):
+        """Verify removing a ToolBit cascades to remove its companion BitBody and features"""
+        doc = FreeCAD.newDocument("TestToolBitDelete")
+        try:
+            shape = self.assets.get("toolbitshape://bullnose")
+            shape = cast(ToolBitShapeBullnose, shape)
+            bullnose_bit = ToolBitBullnose(shape, id="test_bullnose")
+            tool_obj = bullnose_bit.attach_to_doc(doc, label="TestCutter")
+            self.assertIsNotNone(tool_obj.BitBody)
+            body_name = tool_obj.BitBody.Name
+            self.assertIn(body_name, [o.Name for o in doc.Objects])
+
+            # Remove the ToolBit object from the document
+            doc.removeObject(tool_obj.Name)
+
+            # BitBody should have been cascaded and removed from the document
+            self.assertNotIn(body_name, [o.Name for o in doc.Objects])
+        finally:
+            FreeCAD.closeDocument("TestToolBitDelete")
+

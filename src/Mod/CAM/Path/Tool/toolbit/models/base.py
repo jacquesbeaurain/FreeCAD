@@ -627,6 +627,8 @@ class ToolBit(Asset, ABC):
         self.obj.Proxy = self
         if FreeCAD.GuiUp:
             ToolBitView.ViewProvider(self.obj.ViewObject, "ToolBit")
+            if hasattr(self.obj, "ViewObject") and self.obj.ViewObject:
+                self.obj.ViewObject.Visibility = False
 
         self._create_base_properties()
 
@@ -672,6 +674,14 @@ class ToolBit(Asset, ABC):
         finally:
             self._in_update = False
 
+    def unsetupObject(self, obj):
+        Path.Log.track(obj.Label)
+        # Clean up any pending observer
+        if hasattr(self, "_recompute_observer"):
+            FreeCAD.removeDocumentObserver(self._recompute_observer)
+            del self._recompute_observer
+        self._removeBitBody()
+
     def onDelete(self, obj, arg2=None):
         Path.Log.track(obj.Label)
         # Clean up any pending observer
@@ -679,13 +689,19 @@ class ToolBit(Asset, ABC):
             FreeCAD.removeDocumentObserver(self._recompute_observer)
             del self._recompute_observer
         self._removeBitBody()
-        obj.Document.removeObject(obj.Name)
+        if hasattr(obj, "Document") and obj.Document:
+            obj.Document.removeObject(obj.Name)
 
     def _removeBitBody(self):
-        if self.obj.BitBody:
-            self.obj.BitBody.removeObjectsFromDocument()
-            self.obj.Document.removeObject(self.obj.BitBody.Name)
+        if hasattr(self, "obj") and self.obj and hasattr(self.obj, "BitBody") and self.obj.BitBody:
+            body = self.obj.BitBody
             self.obj.BitBody = None
+            try:
+                body.removeObjectsFromDocument()
+                if body.Document:
+                    body.Document.removeObject(body.Name)
+            except Exception as e:
+                Path.Log.debug(f"Error removing BitBody: {e}")
 
     def _setupProperty(self, prop, orig):
         # extract property parameters and values so it can be copied
@@ -968,9 +984,21 @@ class ToolBit(Asset, ABC):
             self.obj.Shape = self.obj.BitBody.Shape  # Copy the evaluated Solid shape
 
             # Hide the visual representation and remove from tree
+            if hasattr(self.obj, "ViewObject") and self.obj.ViewObject:
+                self.obj.ViewObject.Visibility = False
+
             if hasattr(self.obj.BitBody, "ViewObject") and self.obj.BitBody.ViewObject:
                 self.obj.BitBody.ViewObject.Visibility = False
                 self.obj.BitBody.ViewObject.ShowInTree = False
+
+            if hasattr(self.obj.BitBody, "Group"):
+                for child in self.obj.BitBody.Group:
+                    if hasattr(child, "ViewObject") and child.ViewObject:
+                        child.ViewObject.Visibility = False
+
+            if hasattr(self.obj.BitBody, "Tip") and self.obj.BitBody.Tip:
+                if hasattr(self.obj.BitBody.Tip, "ViewObject") and self.obj.BitBody.Tip.ViewObject:
+                    self.obj.BitBody.Tip.ViewObject.Visibility = False
 
         except Exception as e:
             Path.Log.error(
