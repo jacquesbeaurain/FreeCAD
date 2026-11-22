@@ -44,6 +44,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/regex.hpp>
 
+#include <zipios++/gzipoutputstream.h>
+#include <zipios++/zipoutputstream.h>
+
 #include "IO/Reader3MF.h"
 #include "IO/ReaderOBJ.h"
 #include "IO/ReaderPLY.h"
@@ -60,8 +63,6 @@
 #include <Base/Stream.h>
 #include <Base/Tools.h>
 #include <Base/Writer.h>
-#include <zipios++/gzipoutputstream.h>
-#include <zipios++/zipoutputstream.h>
 
 #include "Builder.h"
 #include "Definitions.h"

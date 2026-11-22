@@ -38,11 +38,11 @@
 #include <QtGlobal>
 #include <TopExp.hxx>
 
+#include "WireJoiner.h"
 #include "FaceMakerBullseye.h"
 #include "FaceMakerCheese.h"
 
 #include "TopoShape.h"
-#include "WireJoiner.h"
 
 
 using namespace Part;
